@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.1.5",
     "core-js": "^3.8.3",
     "vue": "^3.2.13",
     "vue-i18n": "^10.0.0"
@@ -24,7 +25,8 @@
     "init": "^0.1.2",
     "npx": "^10.2.2",
     "postcss": "^8.4.47",
-    "tailwindcss": "^3.4.11"
+    "tailwindcss": "^3.4.11",
+    "workbox-webpack-plugin": "^7.1.0"
   },
   "eslintConfig": {
     "root": true,

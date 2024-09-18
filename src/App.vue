@@ -1,7 +1,11 @@
 <template>
   <div
-    :class="{ dark: isDark, rtl: isRTL }"
-    class="min-h-screen bg-gradient-to-br from-indigo-600 to-purple-700 dark:from-gray-900 dark:to-gray-800 transition-colors duration-500 ease-in-out font-cairo"
+    :class="{
+      'bg-gradient-light': !isDark,
+      'bg-gradient-dark': isDark,
+      rtl: isRTL,
+    }"
+    class="min-h-screen transition-colors duration-500 ease-in-out font-cairo"
   >
     <div class="container mx-auto px-4 py-8">
       <header class="mb-8">
@@ -12,44 +16,17 @@
           <div class="flex items-center space-x-4">
             <button
               @click="toggleLanguage"
-              class="text-white hover:text-yellow-300 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md px-3 py-1"
+              class="text-white hover:text-yellow-300 transition-colors text-lg focus:outline-none focus:ring-2 focus:ring-transparent rounded-md px-3 py-1"
             >
-              {{ currentLanguage === "en" ? "العربية" : "English" }}
+              {{ currentLanguage === "en" ? "عربي" : "English" }}
             </button>
+
             <button
               @click="toggleDarkMode"
-              class="text-white hover:text-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md p-1"
+              class="text-white hover:text-yellow-300 transition-colors focus:outline-none focus:ring-2 focus:ring-transparent rounded-md p-1"
             >
-              <svg
-                v-if="isDark"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-              <svg
-                v-else
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                />
-              </svg>
+              <MoonIcon v-if="isDark" class="h-6 w-6" />
+              <SunIcon v-else class="h-6 w-6" />
             </button>
           </div>
         </div>
@@ -67,7 +44,7 @@
               {{ $t("setupGame") }}
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
+              <div class="md:col-span-2">
                 <label
                   for="playerCount"
                   class="block text-sm font-medium text-gray-200 dark:text-gray-300 mb-2"
@@ -77,9 +54,14 @@
                 <select
                   v-model="numberOfPlayers"
                   id="playerCount"
-                  class="w-full px-3 py-2 bg-white bg-opacity-20 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  class="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 text-white"
                 >
-                  <option v-for="n in 5" :key="n" :value="n + 3">
+                  <option
+                    class="bg-gray-400 text-white"
+                    v-for="n in 5"
+                    :key="n"
+                    :value="n + 3"
+                  >
                     {{ n + 3 }}
                   </option>
                 </select>
@@ -100,14 +82,14 @@
                   :id="'player' + (index + 1)"
                   type="text"
                   :placeholder="$t('playerPlaceholder', { number: index + 1 })"
-                  class="w-full px-3 py-2 bg-white bg-opacity-20 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  class="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 text-white"
                 />
               </div>
             </div>
             <button
               @click="startNewGame"
               :disabled="!canStartGame"
-              class="w-full py-3 px-6 bg-green-500 hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-green-400"
+              class="w-full py-3 px-6 bg-gradient-to-r from-green-400 to-green-600 text-white hover:bg-green-600 font-semibold rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out hover:-translate-y-1 focus:outline-none focus:ring-2 disabled:cursor-not-allowed"
             >
               {{ $t("startNewGame") }}
             </button>
@@ -137,12 +119,12 @@
                   :id="'score' + (index + 1)"
                   type="number"
                   :placeholder="$t('enterScore')"
-                  class="w-full px-3 py-2 bg-white bg-opacity-20 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  class="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 text-white"
                 />
               </div>
             </div>
             <div
-              class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4"
+              class="flex flex-col md:flex-row justify-center gap-y-4 md:gap-x-4"
             >
               <button
                 @click="toggleDouble"
@@ -220,7 +202,7 @@
                 @click="deleteGame(index)"
                 class="text-red-400 hover:text-red-600 transition-colors focus:outline-none focus:ring-2 focus:ring-red-400 rounded-md p-1"
               >
-                {{ $t("delete") }}
+                <TrashIcon class="h-8 w-8" />
               </button>
             </li>
           </transition-group>
@@ -240,8 +222,15 @@
 <script>
 import { ref, computed, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
+import { MoonIcon, SunIcon, TrashIcon } from "@heroicons/vue/24/outline";
 
 export default {
+  components: {
+    MoonIcon,
+    SunIcon,
+    TrashIcon,
+  },
+
   setup() {
     const { locale } = useI18n();
 
@@ -301,6 +290,9 @@ export default {
         player.totalScore += score;
         player.currentScore = 0;
       });
+
+      isDoubleRound.value = false;
+
       round.value += 1;
       saveGame();
     };
