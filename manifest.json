@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "Scrow Calculator",
   "short_name": "scrowCalculator",
@@ -13,3 +14,20 @@
     }
   ]
 }
+=======
+{
+  "name": "Scrow Calculator",
+  "short_name": "scrowCalculator",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4DBA87",
+  "icons": [
+    {
+      "src": "img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
+>>>>>>> 7abbae3 (Initial commit)
