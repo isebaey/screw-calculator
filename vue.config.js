@@ -1,8 +1,7 @@
 const { defineConfig } = require("@vue/cli-service");
 
 module.exports = defineConfig({
-  publicPath:
-    process.env.NODE_ENV === "production" ? "/screw-calculator/" : "/",
+  publicPath: process.env.NODE_ENV === "production" ? "/screw/" : "/",
   transpileDependencies: true,
   pwa: {
     name: "Scrow Calculator",
