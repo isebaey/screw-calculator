@@ -29,23 +29,29 @@ A card game calculator built with Vue.js and Tailwind CSS, supporting dark mode,
    cd screw-calculator
 
 2. **Install dependencies**:
-npm install
+   ```bash
+   npm install
 
 3. **Run the development server**:
-npm run serve
+   ```bash
+   npm run serve
 
-4. Build for production:
-npm run build
+5. Build for production:
+   ```bash
+   npm run build
 
 ## Customization
 
-**Color Themes**
+**Color Themes**:
+
 The app supports both light and dark modes, with a smooth transition between the two. Colors and gradients can be customized in the tailwind.config.js file.
 
-**Fonts**
+**Fonts**:
+
 The app uses the Cairo font from Google Fonts, which can be changed in the style section.
 
-**Language Support**
+**Language Support**:
+
 The app currently supports English and Arabic. To add additional languages, update the locale files in the locales folder.
 
 
